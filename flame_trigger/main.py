@@ -1,5 +1,6 @@
 import time
 import requests
+import os
 from dotenv import load_dotenv
 
 from mail.mail import send_mail
@@ -14,12 +15,24 @@ def send_msg(id, msg, type):
     requests.post(url=MSG_ENDPOINT, data=data)
 
 
+def set_id():
+    while not os.path.exists(ID_FILE):
+        pass
+
+    time.sleep(1)
+
+    with open(ID_FILE, "r") as fp:
+        id = fp.readline().strip()
+
+    send_msg(id, "Raspberry conectada", "Good")
+
+    return id
+
+
 if __name__ == "__main__":
     load_dotenv()
 
-    # to-do
-    rpi_id = "clcey79ml0002udo4nxynehy1"
-    send_msg(id, f"Raspberry conectada", "Good")
+    rpi_id = set_id()
 
     flame = Flame()
     buzzer = Buzzer()

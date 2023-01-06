@@ -1,5 +1,6 @@
 import time
 import threading
+import os
 from apscheduler.schedulers.background import BackgroundScheduler
 import requests
 
@@ -20,7 +21,6 @@ def ligt_sensor_job():
         "timestamp": round(time.time() * 1000),
     }
     requests.post(url=LIGHT_ENDPOINT, data=data)
-    print(LIGHT_ENDPOINT, data)
 
 
 def th_sensor_job():
@@ -33,7 +33,6 @@ def th_sensor_job():
         "timestamp": round(time.time() * 1000),
     }
     requests.post(url=TEMP_ENDPOINT, data=data)
-    print(TEMP_ENDPOINT, data)
 
 
 def jobs(sched):
@@ -42,15 +41,20 @@ def jobs(sched):
 
 
 def set_id():
-    # to-do
-    id = "clcey79ml0002udo4nxynehy1"
+    while not os.path.exists(ID_FILE):
+        pass
+
+    time.sleep(1)
+
+    with open(ID_FILE, "r") as fp:
+        id = fp.readline().strip()
+
     data = {
         "raspberryId": id,
         "content": "Raspberry conectada",
         "type": "Good",
     }
     requests.post(url=MSG_ENDPOINT, data=data)
-    print(MSG_ENDPOINT, data)
 
     return id
 
