@@ -17,4 +17,3 @@ class Flame:
 
     def callback(self, channel):
         self.activate = not self.activate
-        print("Flame detected!")

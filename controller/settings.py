@@ -10,3 +10,10 @@ SERVO = 12
 
 # Triggers
 LIGHT_TRIGGER = 40
+
+# API
+URL = "192.168.1.34:3000"
+MSG_ENDPOINT = f"http://{URL}/api/sensor/message"
+TEMP_ENDPOINT = f"http://{URL}/api/sensor/temperature"
+LIGHT_ENDPOINT = f"http://{URL}/api/sensor/ligth"
+RPI_ENDPOINT = f"http://{URL}/api/raspberry"

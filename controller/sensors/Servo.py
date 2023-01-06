@@ -43,4 +43,3 @@ class Servo:
         self.start()
         while self.running:
             self.move()
-        self.stop()

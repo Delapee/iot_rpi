@@ -1,7 +1,9 @@
 import time
 import threading
 from apscheduler.schedulers.background import BackgroundScheduler
+import requests
 
+from settings import *
 from sensors.Servo import Servo
 from sensors.Light import Light
 from sensors.Led import Led
@@ -11,12 +13,27 @@ from sensors.TempHum import TempHum
 def ligt_sensor_job():
     m = light.take_data()
     led.isActivate(light.trigger(m))
-    print(m)
+
+    data = {
+        "raspberryId": rpi_id,
+        "value": m,
+        "timestamp": round(time.time() * 1000),
+    }
+    requests.post(url=LIGHT_ENDPOINT, data=data)
+    print(LIGHT_ENDPOINT, data)
 
 
 def th_sensor_job():
     hum, temp = th.take_data()
-    print(temp, hum)
+
+    data = {
+        "raspberryId": rpi_id,
+        "temperature": temp,
+        "humidity": hum,
+        "timestamp": round(time.time() * 1000),
+    }
+    requests.post(url=TEMP_ENDPOINT, data=data)
+    print(TEMP_ENDPOINT, data)
 
 
 def jobs(sched):
@@ -24,7 +41,23 @@ def jobs(sched):
     sched.add_job(th_sensor_job, "interval", seconds=10)
 
 
+def set_id():
+    # to-do
+    id = "clcey79ml0002udo4nxynehy1"
+    data = {
+        "raspberryId": id,
+        "content": "Raspberry conectada",
+        "type": "Good",
+    }
+    requests.post(url=MSG_ENDPOINT, data=data)
+    print(MSG_ENDPOINT, data)
+
+    return id
+
+
 if __name__ == "__main__":
+    rpi_id = set_id()
+
     light = Light()
     led = Led()
     th = TempHum()
@@ -37,18 +70,19 @@ if __name__ == "__main__":
 
     try:
         sched.start()
+        rpi_url = f"{RPI_ENDPOINT}/{rpi_id}"
+
         while True:
-            # llamada a la api para saver si se enciende o se apagado
-            active = True
+            active = requests.get(url=rpi_url).json()["activator"]
 
             if active and not servo.running:
                 servo.running = True
                 servo_thread = threading.Thread(target=servo.run)
                 servo_thread.start()
-            else:
+            elif not active:
                 servo.running = False
 
             time.sleep(2)
-
     except (KeyboardInterrupt, SystemExit):
+        servo.stop()
         sched.shutdown()
