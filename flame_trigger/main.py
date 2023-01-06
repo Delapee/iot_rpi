@@ -1,8 +1,8 @@
 import concurrent.futures
 import time
-from Buzzer import Buzzer
-from Flame import Flame
-from Rfid import Rfid
+from sensors.Buzzer import Buzzer
+from sensors.Flame import Flame
+from sensors.Rfid import Rfid
 
 
 # def send_data(activate):
