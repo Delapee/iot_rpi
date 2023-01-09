@@ -44,7 +44,7 @@ def set_id():
     while not os.path.exists(ID_FILE):
         pass
 
-    time.sleep(1)
+    time.sleep(10)
 
     with open(ID_FILE, "r") as fp:
         id = fp.readline().strip()
