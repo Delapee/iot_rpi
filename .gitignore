@@ -1,4 +1,6 @@
 .env/
+.docker_env/
 __pycache__/
 .env
 id_rpi.txt
+.asd
