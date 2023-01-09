@@ -20,7 +20,7 @@ def ligt_sensor_job():
         "value": m,
         "timestamp": round(time.time() * 1000),
     }
-    requests.post(url=LIGHT_ENDPOINT, data=data)
+    requests.post(url=LIGHT_ENDPOINT, json=data)
 
 
 def th_sensor_job():
@@ -32,7 +32,7 @@ def th_sensor_job():
         "humidity": hum,
         "timestamp": round(time.time() * 1000),
     }
-    requests.post(url=TEMP_ENDPOINT, data=data)
+    requests.post(url=TEMP_ENDPOINT, json=data)
 
 
 def jobs(sched):
@@ -51,10 +51,10 @@ def set_id():
 
     data = {
         "raspberryId": id,
-        "content": "Raspberry conectada",
+        "content": "Raspberry controller service, conectada",
         "type": "Good",
     }
-    requests.post(url=MSG_ENDPOINT, data=data)
+    requests.post(url=MSG_ENDPOINT, json=data)
 
     return id
 

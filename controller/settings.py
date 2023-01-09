@@ -15,8 +15,8 @@ LIGHT_TRIGGER = 40
 ID_FILE = "/home/papaia/dev/iot_rpi/id_rpi.txt"
 
 # API
-URL = "192.168.1.34:3000"
-MSG_ENDPOINT = f"http://{URL}/api/sensor/message"
-TEMP_ENDPOINT = f"http://{URL}/api/sensor/temperature"
-LIGHT_ENDPOINT = f"http://{URL}/api/sensor/ligth"
-RPI_ENDPOINT = f"http://{URL}/api/raspberry"
+URL = "https://iot-server-nine.vercel.app"
+MSG_ENDPOINT = f"{URL}/api/sensor/message"
+TEMP_ENDPOINT = f"{URL}/api/sensor/temperature"
+LIGHT_ENDPOINT = f"{URL}/api/sensor/ligth"
+RPI_ENDPOINT = f"{URL}/api/raspberry"

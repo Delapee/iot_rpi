@@ -12,7 +12,7 @@ from settings import *
 
 def send_msg(id, msg, type):
     data = {"raspberryId": id, "content": msg, "type": type}
-    requests.post(url=MSG_ENDPOINT, data=data)
+    requests.post(url=MSG_ENDPOINT, json=data)
 
 
 def set_id():
@@ -24,7 +24,7 @@ def set_id():
     with open(ID_FILE, "r") as fp:
         id = fp.readline().strip()
 
-    send_msg(id, "Raspberry conectada", "Good")
+    send_msg(id, "Raspberry flame trigger service, conectada", "Good")
 
     return id
 
@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
             buzzer.isActivate(False)
             flame.activate = False
-            send_msg(rpi_id, f"{name} ha desactivado la alarma de incendios.", "Advert")
+            send_msg(rpi_id, f"{name} ha desactivado la alarma de incendios", "Advert")
             send_mail(
                 "Alarma de Incendios", f"{name} ha desactivado la alarma de incendios."
             )

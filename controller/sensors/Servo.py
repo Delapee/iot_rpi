@@ -1,5 +1,4 @@
 import time
-import threading
 from settings import *
 import RPi.GPIO as GPIO
 

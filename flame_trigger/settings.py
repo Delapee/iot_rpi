@@ -6,5 +6,5 @@ FLAME = 22  # D22
 ID_FILE = "/home/papaia/dev/iot_rpi/id_rpi.txt"
 
 # API
-URL = "192.168.1.34:3000"
-MSG_ENDPOINT = f"http://{URL}/api/sensor/message"
+URL = "https://iot-server-nine.vercel.app"
+MSG_ENDPOINT = f"{URL}/api/sensor/message"

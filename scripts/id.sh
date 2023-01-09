@@ -1,1 +1,3 @@
-echo $( curl -X POST -H "Content-Type: application/json" http://192.168.1.34:3000/api/raspberry ) | tr -d '"' > ~/dev/iot_rpi/id_rpi.txt
+#!/bin/bash
+
+echo $( curl -X POST -H "Content-Type: application/json" https://iot-server-nine.vercel.app/api/raspberry ) | tr -d '"' > ~/dev/iot_rpi/id_rpi.txt
