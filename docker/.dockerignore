@@ -1,0 +1,4 @@
+__pycache__/
+.env
+id_rpi.txt
+docker-compose.yml
