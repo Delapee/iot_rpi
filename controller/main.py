@@ -51,7 +51,7 @@ def set_id():
 
     data = {
         "raspberryId": id,
-        "content": "Raspberry controller service, conectada",
+        "content": "Raspberry controller service connected. ID:",
         "type": "Good",
     }
     requests.post(url=MSG_ENDPOINT, json=data)

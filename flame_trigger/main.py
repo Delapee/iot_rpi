@@ -24,7 +24,7 @@ def set_id():
     with open(ID_FILE, "r") as fp:
         id = fp.readline().strip()
 
-    send_msg(id, "Raspberry flame trigger service, conectada", "Good")
+    send_msg(id, "Raspberry flame trigger service connected. ID:", "Good")
 
     return id
 
@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
         if flame.activate:
             buzzer.isActivate(True)
-            send_msg(rpi_id, "Se ha activado la alarma de incendios.", "Error")
+            send_msg(rpi_id, "Se ha activado la alarma de incendios. ID:", "Error")
             send_mail("Alarma de Incendios", "Se ha activado la alarma de incendios.")
 
             name = rfid.read()
@@ -50,7 +50,11 @@ if __name__ == "__main__":
 
             buzzer.isActivate(False)
             flame.activate = False
-            send_msg(rpi_id, f"{name} ha desactivado la alarma de incendios", "Advert")
+            send_msg(
+                rpi_id,
+                f"{name} ha desactivado la alarma de incendios. ID:",
+                "Advert",
+            )
             send_mail(
                 "Alarma de Incendios", f"{name} ha desactivado la alarma de incendios."
             )

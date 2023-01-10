@@ -35,7 +35,7 @@ def set_id():
 
     data = {
         "raspberryId": id,
-        "content": "Docker conectado",
+        "content": "Docker connected. ID:",
         "type": "Good",
     }
     requests.post(url=MSG_ENDPOINT, json=data)
